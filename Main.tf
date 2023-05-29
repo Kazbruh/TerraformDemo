@@ -45,6 +45,113 @@ resource "azurerm_subnet" "train" {
   address_prefixes     = ["10.0.2.64/27"]
 }
 
+# Network Security Group for "Live"
+resource "azurerm_network_security_group" "live" {
+  name                = "liveNSG"
+  location            = azurerm_resource_group.demo.location
+  resource_group_name = azurerm_resource_group.demo.name
+
+  security_rule {
+    name                       = "Allow80Inbound"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow443Inbound"
+    priority                   = 1002
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_network_security_group" "test" {
+  name                = "testNSG"
+  location            = azurerm_resource_group.demo.location
+  resource_group_name = azurerm_resource_group.demo.name
+
+  security_rule {
+    name                       = "Allow80Inbound"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow443Inbound"
+    priority                   = 1002
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_network_security_group" "train" {
+  name                = "trainNSG"
+  location            = azurerm_resource_group.demo.location
+  resource_group_name = azurerm_resource_group.demo.name
+
+  security_rule {
+    name                       = "Allow80Inbound"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow443Inbound"
+    priority                   = 1002
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+# Associating NSGs with subnets
+resource "azurerm_subnet_network_security_group_association" "live" {
+  subnet_id                 = azurerm_subnet.live.id
+  network_security_group_id = azurerm_network_security_group.live.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "test" {
+  subnet_id                 = azurerm_subnet.test.id
+  network_security_group_id = azurerm_network_security_group.test.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "train" {
+  subnet_id                 = azurerm_subnet.train.id
+  network_security_group_id = azurerm_network_security_group.train.id
+}
+
 # Network interfaces
 resource "azurerm_network_interface" "demo_live" {
   name                = "Demo_NIC_Live"
@@ -96,7 +203,7 @@ resource "azurerm_windows_virtual_machine" "demo_live" {
 
   os_disk {
     caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
+    storage_account_type = "StandardSSD_LRS"
   }
 
   source_image_reference {
@@ -120,7 +227,7 @@ resource "azurerm_windows_virtual_machine" "demo_test" {
 
   os_disk {
     caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
+    storage_account_type = "StandardSSD_LRS"
   }
 
   source_image_reference {
@@ -144,7 +251,7 @@ resource "azurerm_windows_virtual_machine" "demo_train" {
 
   os_disk {
     caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
+    storage_account_type = "StandardSSD_LRS"
   }
 
   source_image_reference {
