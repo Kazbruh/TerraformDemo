@@ -1,0 +1,21 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Ignore all .tfvars files, which might contain secret data
+*.tfvars
+
+# Ignore override files as they can contain sensitive data
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Add this line to your .gitignore
+.terraform.lock.hcl
