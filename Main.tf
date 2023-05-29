@@ -9,7 +9,7 @@ terraform {
     }
   }
 }
-
+ 
 terraform {
   required_providers {
     azurerm = {
