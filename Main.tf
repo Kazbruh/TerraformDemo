@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "demo" {
 }
 
 resource "azurerm_virtual_network" "demo" {
-  name                = "Demo Virtual Network"
+  name                = "Demo_Virtual_Network"
   address_space       = ["10.0.2.0/24"]
   location            = azurerm_resource_group.demo.location
   resource_group_name = azurerm_resource_group.demo.name
@@ -47,7 +47,7 @@ resource "azurerm_subnet" "train" {
 
 # Network interfaces
 resource "azurerm_network_interface" "demo_live" {
-  name                = "Demo NIC Live"
+  name                = "Demo_NIC_Live"
   location            = azurerm_resource_group.demo.location
   resource_group_name = azurerm_resource_group.demo.name
 
@@ -59,7 +59,7 @@ resource "azurerm_network_interface" "demo_live" {
 }
 
 resource "azurerm_network_interface" "demo_test" {
-  name                = "Demo NIC Test"
+  name                = "Demo_NIC_Test"
   location            = azurerm_resource_group.demo.location
   resource_group_name = azurerm_resource_group.demo.name
 
@@ -71,7 +71,7 @@ resource "azurerm_network_interface" "demo_test" {
 }
 
 resource "azurerm_network_interface" "demo_train" {
-  name                = "Demo NIC Train"
+  name                = "Demo_NIC_Train"
   location            = azurerm_resource_group.demo.location
   resource_group_name = azurerm_resource_group.demo.name
 
