@@ -54,7 +54,7 @@ resource "azurerm_network_interface" "demo_live" {
   ip_configuration {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.live.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
   }
 }
 
@@ -66,7 +66,7 @@ resource "azurerm_network_interface" "demo_test" {
   ip_configuration {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.test.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
   }
 }
 
@@ -78,7 +78,7 @@ resource "azurerm_network_interface" "demo_train" {
   ip_configuration {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.train.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
   }
 }
 
