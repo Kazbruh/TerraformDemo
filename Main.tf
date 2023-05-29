@@ -87,8 +87,8 @@ resource "azurerm_windows_virtual_machine" "demo_live" {
   name                = "DemoAppLive"
   resource_group_name = azurerm_resource_group.demo.name
   location            = azurerm_resource_group.demo.location
-  size                = "Standard_B8ms"
-  admin_username      = "Admin"
+  size                = "Standard_B1ls"
+  admin_username      = "AdminUser"
   admin_password      = "Welcome123Live"
   network_interface_ids = [
     azurerm_network_interface.demo_live.id,
@@ -111,8 +111,8 @@ resource "azurerm_windows_virtual_machine" "demo_test" {
   name                = "DemoAppTest"
   resource_group_name = azurerm_resource_group.demo.name
   location            = azurerm_resource_group.demo.location
-  size                = "Standard_B4ms"
-  admin_username      = "Admin"
+  size                = "Standard_B1ls"
+  admin_username      = "AdminUser"
   admin_password      = "Welcome123Test"
   network_interface_ids = [
     azurerm_network_interface.demo_test.id,
@@ -135,8 +135,8 @@ resource "azurerm_windows_virtual_machine" "demo_train" {
   name                = "DemoAppTrain"
   resource_group_name = azurerm_resource_group.demo.name
   location            = azurerm_resource_group.demo.location
-  size                = "Standard_B4ms"
-  admin_username      = "Admin"
+  size                = "Standard_B1ls"
+  admin_username      = "AdminUser"
   admin_password      = "Welcome123Train"
   network_interface_ids = [
     azurerm_network_interface.demo_train.id,
