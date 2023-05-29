@@ -1,3 +1,8 @@
+#DR configure to UK West and enable
+#Backups - Enable - take at 2AM
+#Automanage Production - enable
+#Automanage Dev/Test - enable
+
 terraform {
   required_providers {
     azurerm = {
